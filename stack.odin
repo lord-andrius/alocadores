@@ -16,13 +16,25 @@ Cabecalho_Pequena_Pilha :: struct {
 criar_pequena_pilha :: proc(memoria: []u8) -> Pequena_Pilha {
 	return Pequena_Pilha{
 		memoria = memoria,
-		ponto_da_memoria = 0,
-	}
-	
+	}	
 }
 
 e_potencia_de_dois :: proc(x: uintptr) -> bool {
 	return (x & (x - 1)) == 0
+}
+
+calcular_preenchimento_com_cabecalho :: proc(ptr, alinhamento,  tamanho_do_cabecalho: uintptr) -> uintptr {
+	assert(e_potencia_de_dois(alinhamento))
+	
+	modulo := ptr % alinhamento
+	
+	preenchimento := 0
+	precisa_de_espaco := 0
+	
+	// mesma lógica do alinhar_na_frente
+	if modulo != 0 {
+		preenchimento = alinhamento - modulo
+	}
 }
 
 
